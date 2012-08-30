@@ -35,8 +35,8 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.20'
-        runtime 'oauth.signpost:signpost-core:1.2.1'
-        //runtime 'oauth.signpost:signpost-commonshttp4:1.2'
+        runtime 'oauth.signpost:signpost-core:1.2.1.2'
+        runtime 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
 
     }
 
@@ -44,7 +44,6 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.2"
         runtime ":resources:1.1.6"
-        //compile ':oauth:2.0'
 
 
         // Uncomment these (or add new ones) to enable additional resources capabilities

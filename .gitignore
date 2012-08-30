@@ -24,6 +24,8 @@ test-output
 build.log
 
 # misc
+out
+target
 .DS_Store
 pipeline.log
 *.db
