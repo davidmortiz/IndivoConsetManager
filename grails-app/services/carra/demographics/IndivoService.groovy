@@ -11,10 +11,17 @@ import org.apache.http.NameValuePair
 import org.apache.http.message.BasicNameValuePair
 import org.apache.http.client.entity.UrlEncodedFormEntity
 import org.apache.http.protocol.HTTP
-import oauth.signpost.http.HttpResponse
 import oauth.signpost.OAuth
-import carra.demographics.data.BadRequestException
-import carra.demographics.data.SecurityException
+import carra.demographics.exception.BadRequestException
+import carra.demographics.exception.SecurityException
+import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.client.HttpClient
+import org.apache.http.HttpResponse
+import carra.demographics.exception.IndivoException
+import org.apache.http.params.HttpParams
+import org.apache.http.params.DefaultedHttpParams
+import org.apache.http.params.BasicHttpParams
+import org.apache.jasper.tagplugins.jstl.core.Url
 
 class IndivoService {
   static scope = "session"
@@ -23,13 +30,13 @@ class IndivoService {
 
   private String token;
   private String secret;
-  private String accessToken;
 
   private String recordType
   private String recordId
 
 
-  public IndivoService(){
+
+  public IndivoService() {
 
   }
 
@@ -74,7 +81,7 @@ class IndivoService {
 
       }
 
-      boolean onResponseReceived(HttpRequest request, HttpResponse response) {
+      boolean onResponseReceived(HttpRequest request, oauth.signpost.http.HttpResponse response) {
         return false
       }
     });
@@ -93,19 +100,38 @@ class IndivoService {
 
     CommonsHttpOAuthProvider provider = createProvider()
     CommonsHttpOAuthConsumer consumer = createConsumer()
-    consumer.setTokenWithSecret(token,secret)
+    consumer.setTokenWithSecret(token, secret)
     provider.setOAuth10a(true)
-    String token = provider.retrieveAccessToken(consumer, OAuthVerifier)
-    accessToken = token
-    this.token = ""
-    secret = ""
+    provider.retrieveAccessToken(consumer, OAuthVerifier)
+    token = consumer.getToken()
+    secret = consumer.getTokenSecret()
 
   }
 
 
-  public Demographic getDemographics(String id) {
-    def url = "${grailsApplication.config.indivo.backendUrl}/${recordType}s/${id}/demographics/"
-    HttpGet get = new HttpGet(url)
+  public Demographic getDemographics() {
+    HttpClient client = new DefaultHttpClient()
+    try {
+      CommonsHttpOAuthConsumer consumer = createConsumer()
+      consumer.setTokenWithSecret(token, secret)
+
+
+      String url = "${grailsApplication.config.indivo.backendUrl}/${recordType}s/${recordId}/demographics?response_format=application/xml"
+
+
+      HttpGet get = new HttpGet(url)
+      consumer.sign(get)
+      HttpResponse response = client.execute(get)
+      if(response.getStatusLine().statusCode != 200) {
+        throw new IndivoException("Unknown error")
+      }
+      return Demographic.fromXml(response.entity.content)
+    }
+    finally {
+      client.connectionManager.shutdown()
+    }
+
+
   }
 
 

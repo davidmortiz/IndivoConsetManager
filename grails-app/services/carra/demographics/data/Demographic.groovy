@@ -1,5 +1,12 @@
 package carra.demographics.data
 
+import org.apache.commons.io.IOUtils
+import javax.xml.xpath.XPathFactory
+import org.w3c.dom.Document
+import javax.xml.parsers.DocumentBuilder
+import javax.xml.xpath.XPathConstants
+import javax.xml.parsers.DocumentBuilderFactory
+
 /**
  * @author David Ortiz
  * @date 9/4/12
@@ -28,11 +35,22 @@ class Demographic {
   String organDonor
 
 
-  public static Demographic fromXml(String xml){
+  public static Demographic fromXml(InputStream xmlStream) {
+//    StringWriter writer = new StringWriter();
+//    IOUtils.copy(xmlStream, writer, "utf-8");
+//    String theString = writer.toString();
+
+    def docBuilderFactory = DocumentBuilderFactory.newInstance()
+    def docBuilder = docBuilderFactory.newDocumentBuilder();
+    def xmlDocument = docBuilder.parse(xmlStream);
+
+    def xpath = XPathFactory.newInstance().newXPath()
+    def bday = (String) xpath.evaluate("/Mode/Field/@name=bday",xmlDocument, XPathConstants.STRING)
+    def email = (String) xpath.evaluate("/Mode/Field/@name=email",xmlDocument, XPathConstants.STRING)
+
+
     return null
   }
-
-
 
 
 }

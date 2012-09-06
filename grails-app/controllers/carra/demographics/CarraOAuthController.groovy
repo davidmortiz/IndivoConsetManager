@@ -1,6 +1,6 @@
 package carra.demographics
 
-import carra.demographics.data.BadRequestException
+import carra.demographics.exception.BadRequestException
 
 /**
  * This controller is a slight modification of the same class that comes with the Grails OAuth plugin
@@ -13,7 +13,7 @@ class CarraOAuthController {
   def callback = {
     //we have to pass in authToken so we can do a security check in the service
     indivoService.callback(params.oauth_token, params.oauth_verifier)
-    render(text: "WORK")
+    redirect(controller: "demographic", action: "show")
   }
 
 

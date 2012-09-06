@@ -9,8 +9,7 @@ class DemographicController {
   def index() { }
 
   def show = {
-    def id = session[CarraOAuthController.ID_KEY]
-    Demographic d = indivoService.getDemographics(id)
+    Demographic d = indivoService.getDemographics()
     [demographic: d]
 
   }

@@ -1,4 +1,4 @@
-package carra.demographics.data
+package carra.demographics.exception
 
 /**
  * @author David Ortiz
@@ -9,10 +9,5 @@ package carra.demographics.data
  *       NOTICE: This software comes with NO guarantees whatsoever and is
  *       licensed as Lgpl Open Source
  * @link http://www.gnu.org/licenses/lgpl.html
- */
-class BadRequestException extends RuntimeException{
-
-  public BadRequestException(String message){
-    super(message)
-  }
+ */class SecurityException extends IndivoException {
 }
