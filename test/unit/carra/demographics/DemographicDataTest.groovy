@@ -14,40 +14,60 @@ import org.junit.Test
  * @link http://www.gnu.org/licenses/lgpl.html
  */
 
-import static org.junit.Test.*
 import grails.test.mixin.TestFor
 
 @TestFor(Demographic)
 class DemographicDataTest {
 
   @Test
-  def testDemographics() {
+  void testDemographics() {
     String xml = '''
-       <Models>
-        <Model name="Demographics" documentId="9b4e94b9-6705-4eb5-9a7f-ffb6b646dcbe">
-          <Field name="bday">1939-11-15</Field>
-          <Field name="email">test@test.com</Field>
-          <Field name="ethnicity"/>
-          <Field name="gender">female</Field><Field name="preferred_language"/
-          <Field name="race"/>
-          <Field name="name_given">test</Field>
-          <Field name="name_prefix"/>
-          <Field name="name_suffix"/>
-          <Field name="name_family">test</Field>
-          <Field name="name_middle"/>
-          <Field name="tel_2_type"/>
-          <Field name="tel_2_preferred_p">false</Field>
-          <Field name="tel_2_number"/><Field name="adr_region"/><Field name="adr_country"/>
-          <Field name="adr_postalcode"/>
-          <Field name="adr_city"/><Field name="adr_street"/>
-          <Field name="tel_1_type"/>
-          <Field name="tel_1_preferred_p">false</Field><Field name="tel_1_number"/>
+
+    <Models>
+        <Model name="Demographics" documentId="44190967-cbaa-43a7-a98c-9f97f094ef2b">
+            <Field name="bday">1965-08-09</Field>
+            <Field name="email">william.robinson@example.com</Field>
+            <Field name="ethnicity">dave</Field>
+            <Field name="gender">male</Field>
+            <Field name="preferred_language">EN</Field>
+            <Field name="race">purple</Field>
+            <Field name="name_given">Robinson</Field>
+            <Field name="name_suffix">Sr.</Field>
+            <Field name="name_family">William</Field>
+            <Field name="name_prefix">Sir</Field>
+            <Field name="tel_2_type">h</Field>
+            <Field name="tel_2_preferred_p">True</Field>
+            <Field name="tel_2_number">800-870-3011</Field>
+            <Field name="adr_region">OK</Field>
+            <Field name="adr_country">USA</Field>
+            <Field name="adr_postalcode">74008</Field>
+            <Field name="adr_city">Bixby</Field>
+            <Field name="adr_street">23 Church Rd</Field>
+            <Field name="tel_1_type">h</Field>
+            <Field name="tel_1_preferred_p">True</Field>
+            <Field name="tel_1_number">800-870-3011</Field>
         </Model>
     </Models>
     '''
 
     def inputStream = new ByteArrayInputStream(xml.bytes)
     def d = Demographic.fromXml(inputStream)
+
+    assert d.dateOfBirth == "1965-08-09"
+    assert d.email == "william.robinson@example.com"
+    assert d.gender == "male"
+    assert d.ethnicity == "dave"
+    assert d.language == "EN"
+    assert d.race == "purple"
+    assert d.nameGiven =="Robinson"
+    assert d.nameSuffix == "Sr."
+    assert d.nameFamily == "William"
+    assert d.namePrefix == "Sir"
+    assert d.tel1Type == "h"
+    assert d.tel1Number ==  "800-870-3011"
+    assert d.tel1Preferred == "True"
+    assert d.adrCity ==  "Bixby"
+    assert d.adrPostalcode == "74008"
 
 
   }
