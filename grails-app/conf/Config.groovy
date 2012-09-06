@@ -11,8 +11,8 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-indivo.backendUrl = "http://a:8000"
-indivo.uiUrl = "http://a:8080"
+indivo.backendUrl = "http://sandbox.indivo.org:8000"
+indivo.uiUrl = "http://sandbox.indivo.org"
 
 indivo.consumerKey = "sampleweb@apps.indivo.org"
 indivo.consumerSecret = "yourwebapp"
