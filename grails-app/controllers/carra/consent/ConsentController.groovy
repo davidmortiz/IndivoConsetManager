@@ -20,7 +20,7 @@ class ConsentController {
     }
 
     def enroll = {
-
+        [demographic: session["demographic"]]
     }
 
 }

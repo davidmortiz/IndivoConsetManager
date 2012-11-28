@@ -14,21 +14,26 @@
 </head>
 </head>
 <body>
+
+
 <form>
   <fieldset>
     <legend>Data Consent</legend>
-    <label>Study Identifier (Provided at Enrollment)</label>
-    <input type="text" placeholder="Study Identifier…">
-    <span class="help-block">This will be provided at enrollment time</span>
+    <label>First Name</label>
+    <span class="input-xlarge uneditable-input">${demographic.nameGiven}</span>
 
-        <label>Study Site Identifier (Provided at Enrollment)</label>
+    <label>Last Name</label>
+    <span class="input-xlarge uneditable-input">${demographic.nameFamily}</span>
+
+
+    <label>Study Identifier (Provided at Enrollment)</label>
     <input type="text" placeholder="Study Identifier…">
     <span class="help-block">This will be provided at enrollment time</span>
 
 
 
     <label class="checkbox">
-      <input type="checkbox"> Check me out
+      <input type="checkbox"> I agree with the terms and conditions
     </label>
     <button type="submit" class="btn btn-danger">Enable Study Data Consent</button>
   </fieldset>
