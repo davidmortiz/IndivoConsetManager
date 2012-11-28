@@ -13,7 +13,7 @@ class CarraOAuthController {
   def callback = {
     //we have to pass in authToken so we can do a security check in the service
     indivoService.callback(params.oauth_token, params.oauth_verifier)
-    redirect(controller: "demographic", action: "show")
+    redirect(controller: "consent")
   }
 
 
