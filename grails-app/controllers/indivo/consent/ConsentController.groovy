@@ -1,4 +1,4 @@
-package carra.consent
+package indivo.consent
 
 /**
  * @author David Ortiz

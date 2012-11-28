@@ -1,6 +1,7 @@
-package carra.demographics
+package indivo.demographics
 
 import carra.demographics.exception.BadRequestException
+import carra.demographics.IndivoService
 
 /**
  * This controller is a slight modification of the same class that comes with the Grails OAuth plugin
