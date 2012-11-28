@@ -13,4 +13,11 @@ package indivo.api
 
 class ApiController {
 
+    def getConsent = {
+        //DO AUTH HERE
+
+
+
+    }
+
 }

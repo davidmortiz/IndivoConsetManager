@@ -15,8 +15,7 @@ class ConsentController {
 
     def index = {
         def demographic = indivoService.demographics
-        session["demographic"] = demographic
-        [demographic: demographic]
+        [demographic: session["demographic"]]
     }
 
     def enroll = {
