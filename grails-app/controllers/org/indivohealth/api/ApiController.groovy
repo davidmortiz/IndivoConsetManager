@@ -1,4 +1,4 @@
-package indivo.consent
+package org.indivohealth.api
 
 /**
  * @author David Ortiz
@@ -10,16 +10,14 @@ package indivo.consent
  *       licensed as Lgpl Open Source
  * @link http://www.gnu.org/licenses/lgpl.html
  */
-class ConsentController {
-    def indivoService
 
-    def index = {
-        def demographic = indivoService.demographics
-        [demographic: session["demographic"]]
-    }
+class ApiController {
 
-    def enroll = {
-        [demographic: session["demographic"]]
+    def getConsent = {
+        //DO AUTH HERE
+
+
+
     }
 
 }

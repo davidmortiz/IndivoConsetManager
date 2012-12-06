@@ -1,8 +1,7 @@
-package indivo.demographics
+package org.indivohealth.demographics
 
-import carra.demographics.data.Demographic
-import carra.demographics.IndivoService
-
+import org.indivohealth.data.Demographic
+import org.indivohealth.IndivoService
 
 class DemographicController {
   IndivoService indivoService

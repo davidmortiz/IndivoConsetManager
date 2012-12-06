@@ -1,4 +1,4 @@
-package carra.demographics.exception
+package org.indivohealth.exception
 
 /**
  * @author David Ortiz

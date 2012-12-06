@@ -1,6 +1,5 @@
-package carra.demographics
+package org.indivohealth
 
-import carra.demographics.data.Demographic
 import org.apache.http.client.methods.HttpGet
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider
@@ -12,16 +11,14 @@ import org.apache.http.message.BasicNameValuePair
 import org.apache.http.client.entity.UrlEncodedFormEntity
 import org.apache.http.protocol.HTTP
 import oauth.signpost.OAuth
-import carra.demographics.exception.BadRequestException
-import carra.demographics.exception.SecurityException
+import org.indivohealth.exception.BadRequestException
+import org.indivohealth.exception.SecurityException
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.client.HttpClient
 import org.apache.http.HttpResponse
-import carra.demographics.exception.IndivoException
-import org.apache.http.params.HttpParams
-import org.apache.http.params.DefaultedHttpParams
-import org.apache.http.params.BasicHttpParams
-import org.apache.jasper.tagplugins.jstl.core.Url
+
+import org.indivohealth.data.Demographic
+import org.indivohealth.exception.IndivoException
 
 class IndivoService {
   static scope = "session"

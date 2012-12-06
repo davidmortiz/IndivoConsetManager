@@ -3,7 +3,8 @@ package carra.demographics
 
 
 import grails.test.mixin.*
-import org.junit.*
+
+import org.indivohealth.IndivoService
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
