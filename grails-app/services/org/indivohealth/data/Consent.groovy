@@ -1,6 +1,7 @@
 package org.indivohealth.data
 
 import javax.xml.parsers.DocumentBuilderFactory
+import org.apache.commons.logging.LogFactory
 
 class Consent extends IndivoData {
     private static final log = LogFactory.getLog(this)
