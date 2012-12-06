@@ -1,6 +1,5 @@
 package org.indivohealth.data
 
-import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.xpath.XPathFactory
 import org.w3c.dom.Document
 import javax.xml.xpath.XPathConstants
