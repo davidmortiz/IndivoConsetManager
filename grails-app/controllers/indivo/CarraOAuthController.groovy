@@ -1,4 +1,4 @@
-package indivo.demographics
+package indivo
 
 import carra.demographics.exception.BadRequestException
 import carra.demographics.IndivoService
