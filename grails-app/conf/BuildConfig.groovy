@@ -42,7 +42,11 @@ grails.project.dependency.resolution = {
 
     plugins {
         compile ":twitter-bootstrap:2.2.1"
+<<<<<<< HEAD
 	runtime ":hibernate:$grailsVersion"
+=======
+        runtime ":hibernate:$grailsVersion"
+>>>>>>> 589ffc5ef066bb1addb4ca2cda9335ac2d324ba8
         runtime ":jquery:1.7.2"
         runtime ":resources:1.1.6"
 
@@ -53,9 +57,7 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.4"
 
         build ":tomcat:$grailsVersion"
-
         runtime ":database-migration:1.1"
-
         compile ':cache:1.0.0'
     }
 }
