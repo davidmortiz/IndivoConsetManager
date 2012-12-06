@@ -1,4 +1,4 @@
-package carra.demographics
+package org.indivohealth.data
 
 import org.indivohealth.data.Demographic
 import org.junit.Test

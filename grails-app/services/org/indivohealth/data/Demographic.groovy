@@ -16,7 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory
  * @link http://www.gnu.org/licenses/lgpl.html
  */
 
-class Demographic {
+class Demographic extends IndivoData {
 
   String dateOfBirth
   String email
@@ -84,4 +84,8 @@ class Demographic {
   }
 
 
+    @Override
+    String toXML() {
+        throw new RuntimeException("Unimplemented")
+    }
 }

@@ -113,7 +113,7 @@ class IndivoService {
       consumer.setTokenWithSecret(token, secret)
 
 
-      String url = "${grailsApplication.config.indivo.backendUrl}/${recordType}s/${recordId}/demographics?response_format=application/xml"
+      String url = "${grailsApplication.config.org.indivohealth.backendUrl}/${recordType}s/${recordId}/demographics?response_format=application/xml"
 
 
       HttpGet get = new HttpGet(url)
@@ -134,20 +134,20 @@ class IndivoService {
 
 
   private CommonsHttpOAuthConsumer createConsumer() {
-    return new CommonsHttpOAuthConsumer(grailsApplication.config.indivo.consumerKey.toString(), grailsApplication.config.indivo.consumerSecret.toString())
+    return new CommonsHttpOAuthConsumer(grailsApplication.config.org.indivohealth.consumerKey.toString(), grailsApplication.config.org.indivohealth.consumerSecret.toString())
   }
 
 
   private String request_token_url() {
-    return "${grailsApplication.config.indivo.backendUrl}/oauth/request_token"
+    return "${grailsApplication.config.org.indivohealth.backendUrl}/oauth/request_token"
   }
 
   private String access_token_url() {
-    return "${grailsApplication.config.indivo.backendUrl}/oauth/access_token"
+    return "${grailsApplication.config.org.indivohealth.backendUrl}/oauth/access_token"
   }
 
   private String authentication_url() {
-    return "${grailsApplication.config.indivo.uiUrl}/oauth/authorize"
+    return "${grailsApplication.config.org.indivohealth.uiUrl}/oauth/authorize"
   }
 
   private CommonsHttpOAuthProvider createProvider() {
