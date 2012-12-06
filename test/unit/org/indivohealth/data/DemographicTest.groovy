@@ -1,7 +1,4 @@
-package carra.demographics
-
-import carra.demographics.data.Demographic
-import org.junit.Test
+package org.indivohealth.data
 
 /**
  * @author David Ortiz
@@ -15,9 +12,10 @@ import org.junit.Test
  */
 
 import grails.test.mixin.TestFor
+import org.junit.Test
 
 @TestFor(Demographic)
-class DemographicDataTest {
+class DemographicTest {
 
   @Test
   void testDemographics() {

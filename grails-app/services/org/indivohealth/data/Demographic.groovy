@@ -1,9 +1,7 @@
-package carra.demographics.data
+package org.indivohealth.data
 
-import org.apache.commons.io.IOUtils
 import javax.xml.xpath.XPathFactory
-import org.w3c.dom.Document
-import javax.xml.parsers.DocumentBuilder
+
 import javax.xml.xpath.XPathConstants
 import javax.xml.parsers.DocumentBuilderFactory
 
@@ -18,7 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory
  * @link http://www.gnu.org/licenses/lgpl.html
  */
 
-class Demographic {
+class Demographic extends IndivoDocument<Demographic> {
 
   String dateOfBirth
   String email
@@ -53,10 +51,12 @@ class Demographic {
   String organDonor
 
 
-  public static Demographic fromXml(InputStream xmlStream) {
+  static String getRecordType(){ throw new RuntimeException("Special case") }
+
+  public static Demographic fromXml(String string) {
     def docBuilderFactory = DocumentBuilderFactory.newInstance()
     def docBuilder = docBuilderFactory.newDocumentBuilder();
-    def xmlDocument = docBuilder.parse(xmlStream);
+    def xmlDocument = docBuilder.parse(string);
 
     def xpath = XPathFactory.newInstance().newXPath()
 
@@ -86,4 +86,8 @@ class Demographic {
   }
 
 
+    @Override
+    String toXML() {
+        throw new RuntimeException("Unimplemented")
+    }
 }

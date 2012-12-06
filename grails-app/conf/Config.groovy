@@ -11,11 +11,11 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-indivo.backendUrl = "http://sandbox.indivohealth.org:8000"
-indivo.uiUrl = "http://sandbox.indivohealth.org"
+org.indivohealth.backendUrl = "http://sandbox.indivohealth.org:8000"
+org.indivohealth.uiUrl = "http://sandbox.indivohealth.org"
 
-indivo.consumerKey = "sampleweb@apps.indivo.org"
-indivo.consumerSecret = "yourwebapp"
+org.indivohealth.consumerKey = "sampleweb@apps.indivo.org"
+org.indivohealth.consumerSecret = "yourwebapp"
 
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination

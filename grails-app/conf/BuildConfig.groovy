@@ -37,18 +37,18 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.20'
         runtime 'oauth.signpost:signpost-core:1.2.1.2'
         runtime 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
+        runtime 'joda-time:joda-time:2.1'
+        runtime 'commons-io:commons-io:2.4'
+
 
     }
 
     plugins {
         compile ":twitter-bootstrap:2.2.1"
-<<<<<<< HEAD
-	runtime ":hibernate:$grailsVersion"
-=======
         runtime ":hibernate:$grailsVersion"
->>>>>>> 589ffc5ef066bb1addb4ca2cda9335ac2d324ba8
         runtime ":jquery:1.7.2"
         runtime ":resources:1.1.6"
+
 
 
         // Uncomment these (or add new ones) to enable additional resources capabilities

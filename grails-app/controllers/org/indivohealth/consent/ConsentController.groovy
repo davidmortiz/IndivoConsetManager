@@ -1,4 +1,6 @@
-package indivo.consent
+package org.indivohealth.consent
+
+import org.indivohealth.data.Demographic
 
 /**
  * @author David Ortiz
@@ -20,6 +22,11 @@ class ConsentController {
 
     def enroll = {
         [demographic: session["demographic"]]
+    }
+
+    def save = {
+        Consent
+
     }
 
 }
