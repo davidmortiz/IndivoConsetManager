@@ -2,31 +2,52 @@ package org.indivohealth.data
 
 import javax.xml.parsers.DocumentBuilderFactory
 import org.apache.commons.logging.LogFactory
+import org.joda.time.DateTime
 
-class Consent extends IndivoData {
+class Consent extends IndivoDocument<Consent> {
     private static final log = LogFactory.getLog(this)
+    public static final String RECORD_TYPE = "consent"
 
-    String identifier
+    String studyIdentifier
     String studyName
     Date startDate
     Date endDate
 
+    static String getRecordType(){ RECORD_TYPE }
+
     String toXML() {
-        return null  //To change body of implemented methods use File | Settings | File Templates.
+        DateTime dtStartDate = new DateTime(startDate)
+        DateTime dtEndDate = null
+
+        if(endDate != null && endDate != ""){
+            dtEndDate = new DateTime(endDate)
+        }
+
+        def xml = """
+                   <Models xmlns="http://indivo.org/vocab/xml/documents#">
+                     <Model name="TestMedication" >
+                       <Field name="study_identifier">${studyIdentifier}{</Field>
+                       <Field name="study_name">${studyName}</Field>
+                       <Field name="start_date">${dtStartDate.toString()}</Field>
+                       <Field name="end_date">${dtEndDate?.toString()}</Field>
+                     </Model>
+                    </Models>
+                """
+
+        return xml
     }
 
-    Consent fromXml(InputStream xmlInputStream) {
+    static Consent fromXml(String docString) {
         try {
             def docBuilderFactory = DocumentBuilderFactory.newInstance()
             def docBuilder = docBuilderFactory.newDocumentBuilder();
-            def xmlDocument = docBuilder.parse(xmlInputStream);
+            def xmlDocument = docBuilder.parse(docString);
 
-
-            Date startDate = sdmxFieldAsDate("startDate", xmlDocument)
-            Date endDate = sdmxFieldAsDate("endDate", xmlDocument)
+            Date startDate = sdmxFieldAsDate("start_date", xmlDocument)
+            Date endDate = sdmxFieldAsDate("end_date", xmlDocument)
 
             def returnVal = new Consent(
-                    identifier: sdmxFieldAsString("identifier", xmlDocument),
+                    studyIdentifier: sdmxFieldAsString("study_identifier", xmlDocument),
                     studyName: sdmxFieldAsString("studyName", xmlDocument),
                     startDate: startDate,
                     endDate: endDate
@@ -34,14 +55,9 @@ class Consent extends IndivoData {
             return returnVal
         }
         catch (Exception e) {
+            e.printStackTrace()
             log.fatal("Error reading in consent from XMLStream")
             return null
         }
-        finally {
-            xmlInputStream.close()
-
-        }
-
-
     }
 }

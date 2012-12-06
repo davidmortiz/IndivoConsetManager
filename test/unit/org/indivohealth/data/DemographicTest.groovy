@@ -1,8 +1,5 @@
 package org.indivohealth.data
 
-import org.indivohealth.data.Demographic
-import org.junit.Test
-
 /**
  * @author David Ortiz
  * @date 9/6/12
@@ -15,9 +12,10 @@ import org.junit.Test
  */
 
 import grails.test.mixin.TestFor
+import org.junit.Test
 
 @TestFor(Demographic)
-class DemographicDataTest {
+class DemographicTest {
 
   @Test
   void testDemographics() {

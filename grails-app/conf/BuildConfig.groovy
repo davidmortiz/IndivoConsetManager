@@ -38,6 +38,7 @@ grails.project.dependency.resolution = {
         runtime 'oauth.signpost:signpost-core:1.2.1.2'
         runtime 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
         runtime 'joda-time:joda-time:2.1'
+        runtime 'commons-io:commons-io:2.4'
 
 
     }

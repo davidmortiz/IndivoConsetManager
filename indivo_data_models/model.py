@@ -9,7 +9,7 @@ from django.db import models
 
 class Consent(Fact):
     identifier = models.CharField(max_length=255, null=False)
-    studyName = models.CharField(max_length=255, null=False)
-    startDate = models.DateField(null=False)
-    endDate = models.DateField(null=True)
+    study_name = models.CharField(max_length=255, null=False)
+    start_date = models.DateField(null=False)
+    end_date = models.DateField(null=True)
 
