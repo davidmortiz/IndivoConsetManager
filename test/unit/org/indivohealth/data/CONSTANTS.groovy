@@ -18,7 +18,7 @@ class CONSTANTS {
     <Field name="drugName_title">AMITRIPTYLINE HCL 50 MG TAB</Field>
     <Field name="drugName_system">http://purl.bioontology.org/ontology/RXNORM/</Field>
     <Field name="drugName_identifier">856845</Field>
-    <Field name="endDate">2007-08-14</Field>
+    <Field name="endDate">2007-04-14T04:00:00Z</Field>
     <Field name="frequency_value">2</Field>
     <Field name="frequency_unit">/d</Field>
     <Field name="instructions">Take two tablets twice daily as needed for pain</Field>
@@ -26,8 +26,8 @@ class CONSTANTS {
     <Field name="provenance_system">http://smartplatforms.org/terms/codes/MedicationProvenance#</Field>
     <Field name="provenance_identifier">prescription</Field>
     <Field name="quantity_value">2</Field>
-    <Field name="quantity_unit">{tablet}</Field>
-    <Field name="startDate">2007-03-14</Field>
+    <Field name="quantity_unit">Unit</Field>
+    <Field name="startDate">2007-04-14T04:00:00Z</Field>
     <Field name="fulfillments">
       <Models>
         <Model name="Fill">

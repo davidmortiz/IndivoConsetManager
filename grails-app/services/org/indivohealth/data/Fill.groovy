@@ -42,6 +42,7 @@ class Fill extends IndivoDocument<Fill> {
             providerNpiNumber:      sdmxFieldAsString("provider_npi_number",n),
             providerEmail:          sdmxFieldAsString("provider_email",n),
             providerNameGiven:      sdmxFieldAsString("provider_name_given", n),
+            providerNameFamily:     sdmxFieldAsString("provider_name_family", n),
             providerTel1Type:       sdmxFieldAsString("provider_tel_1_type", n),
             providerTel1Number:     sdmxFieldAsString("provider_tel_1_number", n),
             providerTel1Preferred:  sdmxFieldAsString("provider_tel_1_preferred_p", n),
@@ -51,29 +52,28 @@ class Fill extends IndivoDocument<Fill> {
     }
 
     def String toXML(){
-        """
-        <Model name="Fill">
-          <Field name="date">${formatDate(date)}</Field>
-          <Field name="dispenseDaysSupply">${dispenseDaysSupply}</Field>
-          <Field name="pbm">${pbm}</Field>
-          <Field name="pharmacy_ncpdpid">${pharmacyNcpdpid}</Field>
-          <Field name="pharmacy_org">${pharmacyOrg}</Field>
-          <Field name="pharmacy_adr_country">${pharmacyAdrCountry}</Field>
-          <Field name="pharmacy_adr_city">${pharmacyAdrCity}</Field>
-          <Field name="pharmacy_adr_postalcode">${pharmacyAdrPostalCode}</Field>
-          <Field name="pharmacy_adr_street">${pharmacyAdrStreet}</Field>
-          <Field name="provider_dea_number">${providerDeaNumber}</Field>
-          <Field name="provider_npi_number">${providerNpiNumber}</Field>
-          <Field name="provider_email">${providerEmail}</Field>
-          <Field name="provider_name_given">${providerNameGiven}</Field>
-          <Field name="provider_name_family">${providerNameFamily}</Field>
-          <Field name="provider_tel_1_type">${providerTel1Type}</Field>
-          <Field name="provider_tel_1_number">${providerTel1Number}</Field>
-          <Field name="provider_tel_1_preferred_p">${providerTel1Preferred}</Field>
-          <Field name="quantityDispensed_value">${quantityDispensedValue}</Field>
-          <Field name="quantityDispensed_unit">${quantityDispensedUnit}</Field>
-        </Model>
-        """
+
+        """<Model name="Fill">
+           <Field name="date">${formatDate(date)}</Field>
+           <Field name="dispenseDaysSupply">${dispenseDaysSupply}</Field>
+           <Field name="pbm">${pbm}</Field>
+           <Field name="pharmacy_ncpdpid">${pharmacyNcpdpid}</Field>
+           <Field name="pharmacy_org">${pharmacyOrg}</Field>
+           <Field name="pharmacy_adr_country">${pharmacyAdrCountry}</Field>
+           <Field name="pharmacy_adr_city">${pharmacyAdrCity}</Field>
+           <Field name="pharmacy_adr_postalcode">${pharmacyAdrPostalCode}</Field>
+           <Field name="pharmacy_adr_street">${pharmacyAdrStreet}</Field>
+           <Field name="provider_dea_number">${providerDeaNumber}</Field>
+           <Field name="provider_npi_number">${providerNpiNumber}</Field>
+           <Field name="provider_email">${providerEmail}</Field>
+           <Field name="provider_name_given">${providerNameGiven}</Field>
+           <Field name="provider_name_family">${providerNameFamily}</Field>
+           <Field name="provider_tel_1_type">${providerTel1Type}</Field>
+           <Field name="provider_tel_1_number">${providerTel1Number}</Field>
+           <Field name="provider_tel_1_preferred_p">${providerTel1Preferred}</Field>
+           <Field name="quantityDispensed_value">${quantityDispensedValue}</Field>
+           <Field name="quantityDispensed_unit">${quantityDispensedUnit}</Field>
+        </Model>"""
     }
 
 
