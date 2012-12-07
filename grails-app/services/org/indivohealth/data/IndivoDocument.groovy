@@ -1,7 +1,6 @@
 package org.indivohealth.data
 
 import javax.xml.xpath.XPathFactory
-import javax.xml.xpath.XPathConstants
 import org.joda.time.format.DateTimeFormatter
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTime
@@ -16,11 +15,12 @@ public abstract class IndivoDocument<T extends IndivoDocument> {
 
     //every document has an IndivoID
     String indivoId
+
     public abstract getRecordType()
 
 
     static protected String sdmxFieldAsString(String fieldName, Node modelNode) {
-        return modelNode.find{ it.'@name' == fieldName }?.text()
+        return modelNode.find { it.'@name' == fieldName }?.text()
 
 
     }
@@ -43,8 +43,15 @@ public abstract class IndivoDocument<T extends IndivoDocument> {
         return modelNode.attribute("documentId")
     }
 
-    private static String getDocumentType(Node modelNode){
+    private static String getDocumentType(Node modelNode) {
         return modelNode.attribute("name")
+    }
+
+    protected static String formatDate(Date d) {
+        if(d == null) return null
+        DateTime dt = new DateTime(d)
+        DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+        return fmt.print(dt);
     }
 
     public static List<IndivoDocument> LoadModels(String XML) {
@@ -53,10 +60,10 @@ public abstract class IndivoDocument<T extends IndivoDocument> {
             def records = new XmlParser().parseText(XML)
             def models = records.Model
 
-            for(i in models){
+            for (i in models) {
                 def documentType = getDocumentType(i)
                 IndivoDocument d = null;
-                switch(documentType){
+                switch (documentType) {
                     case "Consent":
                         d = Consent.fromXML(i)
                         break
@@ -70,7 +77,7 @@ public abstract class IndivoDocument<T extends IndivoDocument> {
                 returnList.add(d)
             }
             return returnList
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new IndivoException("Bad response from server", e)
         }
 

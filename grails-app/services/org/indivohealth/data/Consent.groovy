@@ -36,7 +36,6 @@ class Consent extends IndivoDocument<Consent> {
                      </Model>
                     </Models>
                 """
-
         return xml
     }
 

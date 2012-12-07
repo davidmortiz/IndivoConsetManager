@@ -26,6 +26,11 @@ class Medication extends IndivoDocument<Medication> {
     }
 
     static Medication fromXML(Node n){
+        List<Fill> fills = new ArrayList<Fill>()
+        for(i in n.Fill){
+
+        }
+
 
     }
 }
