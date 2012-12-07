@@ -22,9 +22,9 @@ import org.indivohealth.exception.IndivoException
 import org.indivohealth.data.IndivoDocument
 import org.apache.http.client.methods.HttpRequestBase
 import org.apache.commons.io.IOUtils
-import org.apache.http.entity.HttpEntityWrapper
 import org.apache.http.entity.StringEntity
 import org.indivohealth.data.ResponseMetadata
+import org.apache.http.client.methods.HttpPut
 
 class IndivoService {
     static scope = "session"
@@ -111,15 +111,23 @@ class IndivoService {
 
     }
 
-    public String createDocument(IndivoDocument d){
+    public ResponseMetadata createDocument(IndivoDocument d){
         String url = baseUrl() + "/documents/"
         HttpPost post = new HttpPost(url)
         post.setEntity(new StringEntity(d.toXML()))
         String response = makeIndivoRequest(post)
+        return ResponseMetadata.fromXML(response)
 
-        ResponseMetadata data = ResponseMetadata.fromXml(response)
-        return null
+    }
 
+    public ResponseMetadata updateDocument(IndivoDocument d){
+        if(d.indivoId == null){
+            throw new IndivoException("Can't creat document with NULL indivoId")
+        }
+        String url = baseUrl() + "/documents/"
+        HttpPut put = new HttpPut(url)
+        String response = makeIndivoRequest(put)
+        ResponseMetadata.fromXML(response)
     }
 
     public <T extends IndivoDocument<T>> T getDocumentById(T t, String id) {
@@ -136,19 +144,16 @@ class IndivoService {
         }
         else{
             IndivoDocument doc = resultList.first()
-
-            if(doc.getRecordType() == T.getRecordType()){
-                //This case should be safe if the record types match
-                return (T)doc;
+            //This case should be safe if the record types match
+            if(doc.class == T){
+                return (T) doc;
             }
             else{
-                throw new IndivoException("Queried document ${id}, expected: ${T.getRecordType()} "
+                throw new IndivoException("Queried document ${id}, expected: ${T} "
                 + "recieved: ${doc.getRecordType()}")
             }
 
         }
-
-        return T.fromXML(result)
     }
 
 
