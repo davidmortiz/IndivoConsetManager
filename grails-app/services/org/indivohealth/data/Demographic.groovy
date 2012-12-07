@@ -1,9 +1,8 @@
 package org.indivohealth.data
 
 import javax.xml.xpath.XPathFactory
-
-import javax.xml.xpath.XPathConstants
 import javax.xml.parsers.DocumentBuilderFactory
+import org.indivohealth.exception.IndivoException
 
 /**
  * @author David Ortiz
@@ -50,38 +49,38 @@ class Demographic extends IndivoDocument<Demographic> {
   String highestEducation
   String organDonor
 
+  public String getRecordType(){
+      throw new IndivoException("Demographics shouldn't be coming back from Documents")
+  }
 
-  static String getRecordType(){ throw new RuntimeException("Special case") }
-
-  public static Demographic fromXml(String string) {
+  public static Demographic fromXML(Node n) {
     def docBuilderFactory = DocumentBuilderFactory.newInstance()
     def docBuilder = docBuilderFactory.newDocumentBuilder();
-    def xmlDocument = docBuilder.parse(string);
-
     def xpath = XPathFactory.newInstance().newXPath()
 
+
     return new Demographic(
-    dateOfBirth: (String) xpath.evaluate("/Models/Model/Field[@name='bday']/text()",xmlDocument, XPathConstants.STRING),
-    email: (String) xpath.evaluate("/Models/Model/Field[@name='email']/text()",xmlDocument, XPathConstants.STRING),
-    language: (String) xpath.evaluate("/Models/Model/Field[@name='preferred_language']/text()",xmlDocument, XPathConstants.STRING),
-    ethnicity: (String) xpath.evaluate("/Models/Model/Field[@name='ethnicity']/text()",xmlDocument, XPathConstants.STRING),
-    gender: (String) xpath.evaluate("/Models/Model/Field[@name='gender']/text()",xmlDocument, XPathConstants.STRING),
-    race: (String) xpath.evaluate("/Models/Model/Field[@name='race']/text()",xmlDocument, XPathConstants.STRING),
-    nameGiven: (String) xpath.evaluate("/Models/Model/Field[@name='name_given']/text()",xmlDocument, XPathConstants.STRING),
-    nameSuffix: (String) xpath.evaluate("/Models/Model/Field[@name='name_suffix']/text()",xmlDocument, XPathConstants.STRING),
-    nameFamily: (String) xpath.evaluate("/Models/Model/Field[@name='name_family']/text()",xmlDocument, XPathConstants.STRING),
-    namePrefix: (String) xpath.evaluate("/Models/Model/Field[@name='name_prefix']/text()",xmlDocument, XPathConstants.STRING),
-    tel1Type: (String) xpath.evaluate("/Models/Model/Field[@name='tel_1_type']/text()",xmlDocument, XPathConstants.STRING),
-    tel1Number: (String) xpath.evaluate("/Models/Model/Field[@name='tel_1_number']/text()",xmlDocument, XPathConstants.STRING),
-    tel1Preferred: (String) xpath.evaluate("/Models/Model/Field[@name='tel_1_preferred_p']/text()",xmlDocument, XPathConstants.STRING),
-    tel2Type: (String) xpath.evaluate("/Models/Model/Field[@name='tel_2_type']/text()",xmlDocument, XPathConstants.STRING) ,
-    tel2Number: (String) xpath.evaluate("/Models/Model/Field[@name='tel_2_number']/text()",xmlDocument, XPathConstants.STRING),
-    tel2Preferred: (String) xpath.evaluate("/Models/Model/Field[@name='tel_2_preferred']/text()",xmlDocument, XPathConstants.STRING) ,
-    adrRegion: (String) xpath.evaluate("/Models/Model/Field[@name='adr_region']/text()",xmlDocument, XPathConstants.STRING) ,
-    adrPostalcode: (String) xpath.evaluate("/Models/Model/Field[@name='adr_postalcode']/text()",xmlDocument, XPathConstants.STRING),
-    adrStreet: (String) xpath.evaluate("/Models/Model/Field[@name='adr_street']/text()",xmlDocument, XPathConstants.STRING),
-    adrCity: (String) xpath.evaluate("/Models/Model/Field[@name='adr_city']/text()",xmlDocument, XPathConstants.STRING)  ,
-    adrState: (String) xpath.evaluate("/Models/Model/Field[@name='adr_state']/text()",xmlDocument, XPathConstants.STRING))
+        dateOfBirth:   sdmxFieldAsDate("bday", n),
+        email:         sdmxFieldAsString("email", n),
+        language:      sdmxFieldAsString("preferred_language",n),
+        ethnicity:     sdmxFieldAsString("ethnicity",n),
+        gender:        sdmxFieldAsString("gender",n),
+        race:          sdmxFieldAsString("race",n),
+        nameGiven:     sdmxFieldAsString("name_given", n),
+        nameSuffix:    sdmxFieldAsString("name_suffix", n),
+        nameFamily:    sdmxFieldAsString("name_family", n),
+        namePrefix:    sdmxFieldAsString("name_prefix", n),
+        tel1Type:      sdmxFieldAsString("tel_1_type", n),
+        tel1Number:    sdmxFieldAsString("tel_1_number", n),
+        tel1Preferred: sdmxFieldAsString("tel_1_preferred_p", n),
+        tel2Type:      sdmxFieldAsString("tel_2_type", n),
+        tel2Number:    sdmxFieldAsString("tel_2_number", n),
+        tel2Preferred: sdmxFieldAsString("tel_2_preferred", n),
+        adrRegion:     sdmxFieldAsString("adr_region", n),
+        adrPostalcode: sdmxFieldAsString("adr_postalcode",n),
+        adrStreet:     sdmxFieldAsString("adr_street",n),
+        adrCity:       sdmxFieldAsString("adr_city", n),
+        adrState:      sdmxFieldAsString("adr_state", n))
 
   }
 
