@@ -22,6 +22,9 @@ import org.indivohealth.exception.IndivoException
 import org.indivohealth.data.IndivoDocument
 import org.apache.http.client.methods.HttpRequestBase
 import org.apache.commons.io.IOUtils
+import org.apache.http.entity.StringEntity
+import org.indivohealth.data.ResponseMetadata
+import org.apache.http.client.methods.HttpPut
 
 class IndivoService {
     static scope = "session"
@@ -108,13 +111,52 @@ class IndivoService {
 
     }
 
-    public <T extends IndivoDocument> T getDocumentById(T t, String id) {
+    public ResponseMetadata createDocument(IndivoDocument d){
+        String url = baseUrl() + "/documents/"
+        HttpPost post = new HttpPost(url)
+        post.setEntity(new StringEntity(d.toXML()))
+        String response = makeIndivoRequest(post)
+        return ResponseMetadata.fromXML(response)
+
+    }
+
+    public ResponseMetadata updateDocument(IndivoDocument d){
+        if(d.indivoId == null){
+            throw new IndivoException("Can't creat document with NULL indivoId")
+        }
+        String url = baseUrl() + "/documents/"
+        HttpPut put = new HttpPut(url)
+        String response = makeIndivoRequest(put)
+        ResponseMetadata.fromXML(response)
+    }
+
+    public <T extends IndivoDocument<T>> T getDocumentById(T t, String id) {
         String url = baseUrl() + "/documents/${id}"
         HttpGet get = new HttpGet(url)
         String result = makeIndivoRequest(get)
-        T returnVal = (T) T.fromXml(result)
-        return returnVal
+        def resultList = IndivoDocument.LoadModels(result)
+        if(result.size() == 0){
+            return null
+        }
+        else if(resultList.size() > 1){
+            log.fatal("Multiple Models were return querying from document ${id}")
+            throw new IndivoException("Multiple Models returned for document id, failing", null)
+        }
+        else{
+            IndivoDocument doc = resultList.first()
+            //This case should be safe if the record types match
+            if(doc.class == T){
+                return (T) doc;
+            }
+            else{
+                throw new IndivoException("Queried document ${id}, expected: ${T} "
+                + "recieved: ${doc.getRecordType()}")
+            }
+
+        }
     }
+
+
 
 
 
@@ -122,7 +164,7 @@ class IndivoService {
         String url = baseUrl() + "/demographics?response_format=application/xml"
         HttpGet get = new HttpGet(url)
         String result = makeIndivoRequest(get)
-        return Demographic.fromXml(result) ;
+        return Demographic.fromXML(result) ;
 
     }
 

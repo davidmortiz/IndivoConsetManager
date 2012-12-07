@@ -1,20 +1,23 @@
 package org.indivohealth.data
 
-import javax.xml.parsers.DocumentBuilderFactory
 import org.apache.commons.logging.LogFactory
 import org.joda.time.DateTime
 
 class Consent extends IndivoDocument<Consent> {
     private static final log = LogFactory.getLog(this)
-    public static final String RECORD_TYPE = "consent"
+
+    public static String recordType = "Consent"
+
+    public getRecordType() { return recordType }
+
+
 
     String studyIdentifier
     String studyName
     Date startDate
     Date endDate
 
-    static String getRecordType(){ RECORD_TYPE }
-
+    @Override
     String toXML() {
         DateTime dtStartDate = new DateTime(startDate)
         DateTime dtEndDate = null
@@ -33,22 +36,19 @@ class Consent extends IndivoDocument<Consent> {
                      </Model>
                     </Models>
                 """
-
         return xml
     }
 
-    static Consent fromXml(String docString) {
+    static Consent fromXML(Node n) {
         try {
-            def docBuilderFactory = DocumentBuilderFactory.newInstance()
-            def docBuilder = docBuilderFactory.newDocumentBuilder();
-            def xmlDocument = docBuilder.parse(docString);
 
-            Date startDate = sdmxFieldAsDate("start_date", xmlDocument)
-            Date endDate = sdmxFieldAsDate("end_date", xmlDocument)
+
+            Date startDate = sdmxFieldAsDate("start_date", n)
+            Date endDate = sdmxFieldAsDate("end_date", n)
 
             def returnVal = new Consent(
-                    studyIdentifier: sdmxFieldAsString("study_identifier", xmlDocument),
-                    studyName: sdmxFieldAsString("studyName", xmlDocument),
+                    studyIdentifier: sdmxFieldAsString("study_identifier", n),
+                    studyName: sdmxFieldAsString("study_name", n),
                     startDate: startDate,
                     endDate: endDate
             )

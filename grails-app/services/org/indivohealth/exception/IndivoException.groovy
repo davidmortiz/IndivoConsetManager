@@ -10,5 +10,13 @@ package org.indivohealth.exception
  *       licensed as Lgpl Open Source
  * @link http://www.gnu.org/licenses/lgpl.html
  */
-class IndivoException extends RuntimeException{
+class IndivoException extends RuntimeException
+{
+
+    public IndivoException(String cause){
+           super(cause)
+       }
+    public IndivoException(String cause, Exception e){
+        super(cause, e)
+    }
 }

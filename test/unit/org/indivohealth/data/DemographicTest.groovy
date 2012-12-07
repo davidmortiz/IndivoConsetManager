@@ -49,7 +49,8 @@ class DemographicTest {
     '''
 
     def inputStream = new ByteArrayInputStream(xml.bytes)
-    def d = Demographic.fromXml(inputStream)
+
+      def d = Demographic.fromXML(inputStream)
 
     assert d.dateOfBirth == "1965-08-09"
     assert d.email == "william.robinson@example.com"
