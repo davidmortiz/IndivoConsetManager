@@ -41,4 +41,31 @@ class TestLoadDocuments {
         assert c.endDate != null
 
     }
+
+    @Test
+    void testLoadDemographic(){
+        def resultList = IndivoDocument.LoadModels(CONSTANTS.TEST_DOC_DEMOGRAPHIC)
+        assert 1 == resultList.size()
+        Demographic d = resultList.first()
+
+        assert d.dateOfBirth == "1965-08-09"
+        assert d.email == "william.robinson@example.com"
+        assert d.gender == "male"
+        assert d.ethnicity == "dave"
+        assert d.language == "EN"
+        assert d.race == "purple"
+        assert d.nameGiven == "Robinson"
+        assert d.nameSuffix == "Sr."
+        assert d.nameFamily == "William"
+        assert d.namePrefix == "Sir"
+        assert d.tel1Type == "h"
+        assert d.tel1Number == "800-870-3011"
+        assert d.tel1Preferred == "True"
+        assert d.adrCity == "Bixby"
+        assert d.adrPostalcode == "74008"
+    }
+
+
+
+
 }

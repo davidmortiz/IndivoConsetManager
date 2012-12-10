@@ -18,7 +18,7 @@ import org.junit.Test
 @TestFor(Consent)
 class ConsentTest {
     @Test
-    def testFromXml(){
+    void testFromXml(){
 
     }
 

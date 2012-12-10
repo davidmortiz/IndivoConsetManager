@@ -13,6 +13,6 @@ import org.indivohealth.IndivoService
 class IndivoServiceTests {
 
     void testSomething() {
-        fail "Implement me"
+
     }
 }
